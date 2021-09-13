@@ -4,8 +4,9 @@ import re
 
 
 def get_email(sender):
-    user = "newsletterreaderbot@gmail.com"
-    password = "ImARobotWhoReadsNewsletters"
+    user_and_password = open('userAndPassword.txt', 'r')
+    user, password = user_and_password.read().splitlines()
+
     inbox = ei.connect("imap.gmail.com", user, password)
     for email_id in range(0, len(inbox.listids())):
         email = inbox.mail(inbox.listids()[email_id])
@@ -17,7 +18,8 @@ def get_email(sender):
             body = warning.join(re.split("\(|\)|\[|\]", body)[::2])
             newsletter_txt.write(body)
             newsletter_txt.close()
-    inbox.quit()
+            inbox.quit()
+            return
 
 
 def say_and_save(text):

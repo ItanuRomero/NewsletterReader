@@ -115,3 +115,6 @@ dmypy.json
 
 # .idea
 .idea/
+
+# remove userAndPassword
+userAndPassword.txt
